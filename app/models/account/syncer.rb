@@ -6,6 +6,7 @@ class Account::Syncer
   end
 
   def perform_sync(sync)
+    fetch_transactions_from_script
     Rails.logger.info("Processing balances (#{account.linked? ? 'reverse' : 'forward'})")
     import_market_data
     materialize_balances
@@ -33,5 +34,15 @@ class Account::Syncer
     rescue => e
       Rails.logger.error("Error syncing market data for account #{account.id}: #{e.message}")
       Sentry.capture_exception(e)
+    end
+
+    def fetch_transactions_from_script
+      return unless account.sync_script_path.present?
+
+      added = Account::TransactionScriptRunner.new(account).run
+      Rails.logger.info("Imported #{added} transactions via script for account #{account.id}")
+    rescue Account::TransactionScriptRunner::PushTanRequired
+      account.broadcast_push_tan_required
+      raise
     end
 end
