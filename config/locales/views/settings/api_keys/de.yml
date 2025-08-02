@@ -1,0 +1,95 @@
+---
+de:
+  settings:
+    api_keys_controller:
+      success: Dein API-Schlüssel wurde erfolgreich erstellt
+      revoked_successfully: API-Schlüssel wurde erfolgreich widerrufen
+      revoke_failed: Widerruf des API-Schlüssels fehlgeschlagen
+      scope_descriptions:
+        read_accounts: Konten anzeigen
+        read_transactions: Transaktionen anzeigen
+        read_balances: Kontostände anzeigen
+        write_transactions: Transaktionen erstellen
+    api_keys:
+      show:
+        title: API-Schlüssel-Verwaltung
+      no_api_key:
+        title: Erstelle deinen API-Schlüssel
+        description: Erhalte programmatischen Zugriff auf deine Maybe-Daten mit einem
+          sicheren API-Schlüssel.
+        what_you_can_do: 'Was du mit der API tun kannst:'
+        feature_1: Greife programmatisch auf deine Kontodaten zu
+        feature_2: Erstelle eigene Integrationen und Anwendungen
+        feature_3: Automatisiere das Abrufen und Analysieren von Daten
+        security_note_title: Sicherheit zuerst
+        security_note: Dein API-Schlüssel erhält eingeschränkte Berechtigungen basierend
+          auf den von dir gewählten Bereichen. Du kannst jeweils nur einen aktiven
+          API-Schlüssel haben.
+        create_api_key: API-Schlüssel erstellen
+      current_api_key:
+        title: Dein API-Schlüssel
+        description: Dein aktiver API-Schlüssel ist einsatzbereit. Halte ihn sicher
+          und teile ihn niemals öffentlich.
+        active: Aktiv
+        key_name: Name
+        created_at: Erstellt am
+        last_used: Zuletzt verwendet
+        expires: Läuft ab
+        ago: vor
+        never_used: Nie verwendet
+        never_expires: Läuft nie ab
+        permissions: Berechtigungen
+        usage_instructions_title: Wie du deinen API-Schlüssel verwendest
+        usage_instructions: 'Füge deinen API-Schlüssel im Header X-Api-Key hinzu,
+          wenn du Anfragen an die Maybe-API stellst:'
+        regenerate_key: Neuen Schlüssel erstellen
+        revoke_key: Schlüssel widerrufen
+        revoke_confirmation: Bist du sicher, dass du diesen API-Schlüssel widerrufen
+          möchtest? Diese Aktion kann nicht rückgängig gemacht werden und deaktiviert
+          sofort alle Anwendungen, die diesen Schlüssel verwenden.
+      new:
+        title: API-Schlüssel erstellen
+        create_new_key: Neuen API-Schlüssel erstellen
+        description: Konfiguriere deinen neuen API-Schlüssel mit einem beschreibenden
+          Namen und passenden Berechtigungen.
+        name_label: Name des API-Schlüssels
+        name_placeholder: z. B. Produktionsanwendung, Analyse-Dashboard
+        name_help: Wähle einen beschreibenden Namen, damit du den Zweck dieses Schlüssels
+          erkennen kannst.
+        permissions_label: Berechtigungen
+        permissions_help: Wähle die Berechtigungen aus, die dein API-Schlüssel benötigt.
+          Du kannst jederzeit einen neuen Schlüssel mit anderen Berechtigungen erstellen.
+        scope_details:
+          read_accounts: Zeige Kontoinformationen, Kontostände und kontoübergreifende
+            Daten an
+          read_transactions: Zeige Transaktionsdaten, Kategorien und Transaktionsdetails
+            an
+          read_balances: Zeige historische Kontostandsdaten und Wertentwicklung der
+            Konten an
+          write_transactions: Erstelle und aktualisiere Transaktionsdaten (kommt bald)
+        security_warning_title: Wichtiger Sicherheitshinweis
+        security_warning: Dein API-Schlüssel wird nach der Erstellung nur einmal angezeigt.
+          Speichere ihn sicher und teile ihn niemals öffentlich. Wenn du ihn verlierst,
+          musst du einen neuen erstellen.
+        create_key: API-Schlüssel erstellen
+        cancel: Abbrechen
+      created:
+        title: API-Schlüssel erstellt
+        success_title: API-Schlüssel erfolgreich erstellt
+        success_description: Dein neuer API-Schlüssel ist einsatzbereit. Stelle sicher,
+          dass du ihn jetzt kopierst, da du ihn später nicht mehr sehen kannst.
+        your_api_key: Dein API-Schlüssel
+        key_name: Name
+        permissions: Berechtigungen
+        critical_warning_title: '⚠️ Wichtig: Speichere deinen API-Schlüssel jetzt'
+        critical_warning_1: Dies ist das einzige Mal, dass du deinen API-Schlüssel
+          im Klartext siehst.
+        critical_warning_2: Kopiere ihn und speichere ihn sicher in deinem Passwortmanager
+          oder deiner Anwendung.
+        critical_warning_3: Wenn du diesen Schlüssel verlierst, musst du einen neuen
+          erstellen.
+        usage_instructions_title: Schnellstart
+        usage_instructions: 'Verwende deinen API-Schlüssel, indem du ihn im Header
+          X-Api-Key einfügst:'
+        copy_key: API-Schlüssel kopieren
+        continue: Weiter zu den API-Schlüsseleinstellungen
