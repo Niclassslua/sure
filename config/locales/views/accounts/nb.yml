@@ -17,6 +17,7 @@ nb:
       balance: Nåværende balanse
       name_label: Kontonavn
       name_placeholder: Eksempel på kontonavn
+      logo: Logo
     index:
       accounts: Kontoer
       manual_accounts:

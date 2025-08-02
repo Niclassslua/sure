@@ -17,6 +17,7 @@ en:
       balance: Current balance
       name_label: Account name
       name_placeholder: Example account name
+      logo: Logo
     index:
       accounts: Accounts
       manual_accounts:
