@@ -75,6 +75,8 @@ nb:
         select_account: Velg konto
         choose: Velg
         script_label: Python-skript
+        requirements_label: requirements.txt
+        env_label: .env-fil
         upload: Last opp
         current_script: Gjeldende skript
     settings_nav:

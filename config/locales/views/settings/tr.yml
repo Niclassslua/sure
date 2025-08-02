@@ -73,6 +73,8 @@ tr:
         select_account: Hesap seç
         choose: Seç
         script_label: Python komut dosyası
+        requirements_label: requirements.txt
+        env_label: .env dosyası
         upload: Yükle
         current_script: Mevcut komut dosyası
     settings_nav:

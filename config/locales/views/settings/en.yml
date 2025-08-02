@@ -76,6 +76,8 @@ en:
         select_account: Select account
         choose: Choose
         script_label: Python script
+        requirements_label: requirements.txt
+        env_label: .env file
         upload: Upload
         current_script: Current script
     settings_nav:

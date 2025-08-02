@@ -1,5 +1,6 @@
 require "open3"
 require "json"
+require "dotenv"
 
 class Account::TransactionScriptRunner
   class PushTanRequired < StandardError; end
@@ -19,6 +20,8 @@ class Account::TransactionScriptRunner
     install_output = install_requirements
 
     env = {}
+    env_file = File.join(File.dirname(account.sync_script_path), ".env")
+    env.merge!(Dotenv.parse(env_file)) if File.exist?(env_file)
     env["TAN_PROCEDURE"] = procedure if procedure.present?
     env["TAN_DEVICE"] = device if device.present?
 

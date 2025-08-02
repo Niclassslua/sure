@@ -65,4 +65,25 @@ class TransactionScriptRunnerTest < ActiveSupport::TestCase
       runner.run
     end
   end
+
+  test "loads env variables if present" do
+    Dir.mktmpdir do |dir|
+      script_path = File.join(dir, "script.py")
+      File.write(script_path, <<~PYTHON)
+        import os, sys
+        sys.stderr.write(os.getenv("API_KEY") + "\n")
+        print("[]")
+      PYTHON
+
+      env_path = File.join(dir, ".env")
+      File.write(env_path, "API_KEY=secret\n")
+      File.chmod(0o600, env_path)
+
+      @account.update!(sync_script_path: script_path)
+      runner = Account::TransactionScriptRunner.new(@account)
+
+      result = runner.run
+      assert_match "secret", result.output
+    end
+  end
 end
