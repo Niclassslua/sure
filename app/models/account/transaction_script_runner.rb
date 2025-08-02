@@ -16,16 +16,17 @@ class Account::TransactionScriptRunner
   # Gibt die Anzahl neu hinzugefügter Einträge zurück.
   def run(procedure: nil, device: nil)
     return Result.new(0, "") unless account.sync_script_path.present?
-
     install_output = install_requirements
 
     env = {}
     env["TAN_PROCEDURE"] = procedure if procedure.present?
     env["TAN_DEVICE"] = device if device.present?
 
-    stdout, stderr, _status = Open3.capture3(env, "python3", account.sync_script_path)
-    output = [ install_output, stdout, stderr ].reject(&:blank?).join("\n").strip
-    Rails.logger.info("Transaction script output for account #{account.id}:\n#{output}")
+    stdout, stderr, status = Open3.capture3(env, "python3", account.sync_script_path)
+    Rails.logger.info("Transaction script stdout:\n#{stdout}") if stdout.present?
+    Rails.logger.info("Transaction script stderr:\n#{stderr}") if stderr.present?
+    Rails.logger.info("Transaction script exited with status #{status.exitstatus}") unless status.success?
+    output = [ stdout, stderr ].join("\n")
 
     # pushTAN / BestSign Hinweis erkennen
     if output.match?(/push[- ]?tan/i) || output.match?(/bestsign/i)
@@ -74,7 +75,6 @@ class Account::TransactionScriptRunner
     Rails.logger.error("Failed to parse transaction script output: #{e.message}; raw stdout: #{stdout.inspect}")
     Result.new(0, output)
   end
-
     private
 
       def install_requirements

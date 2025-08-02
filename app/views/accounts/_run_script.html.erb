@@ -1,12 +1,30 @@
 <%= render DS::Dialog.new do |dialog| %>
-  <% dialog.with_header(title: "Python Script ausführen") %>
+  <% dialog.with_header(title: t('.title', default: 'Run Python script')) %>
+
   <% dialog.with_body do %>
-    <%= styled_form_with url: run_script_account_path(@account), method: :post, data: { turbo_frame: :modal }, class: "space-y-4" do |form| %>
-      <%= form.text_field :procedure, label: "Verfahren" %>
-      <%= form.text_field :device, label: "Gerät" %>
-      <div class="flex justify-end">
-        <%= form.submit "Run", class: "bg-inverse fg-inverse rounded-lg px-4 py-2" %>
-      </div>
-    <% end %>
+    <div class="bg-container shadow-border-xs rounded-xl p-6 space-y-6">
+      <%= form_with url: run_script_account_path(account), method: :post, class: 'space-y-6' do |f| %>
+        <div class="grid grid-cols-1 gap-4">
+          <div>
+            <%= f.label :procedure, 'Verfahren', class: 'block text-sm font-medium text-secondary mb-1' %>
+            <%= f.text_field :procedure, class: 'w-full bg-container-inset border border-secondary rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-secondary text-primary' %>
+          </div>
+          <div>
+            <%= f.label :device, 'Gerät', class: 'block text-sm font-medium text-secondary mb-1' %>
+            <%= f.text_field :device, class: 'w-full bg-container-inset border border-secondary rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-secondary text-primary' %>
+          </div>
+        </div>
+
+       <div class="flex justify-end">
+          <%= render DS::Button.new(
+                text: 'Run',
+                type: 'submit',
+                class: 'font-medium whitespace-nowrap inline-flex items-center gap-1 rounded-md px-4 py-2 text-sm 
+                      bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 
+                      text-gray-900 dark:text-gray-100'
+              ) %>
+        </div>
+      <% end %>
+    </div>
   <% end %>
 <% end %>
