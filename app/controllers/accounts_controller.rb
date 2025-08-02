@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  before_action :set_account, only: %i[sync sparkline toggle_active show destroy]
+  before_action :set_account, only: %i[sync run_script sparkline toggle_active show destroy]
   include Periodable
 
   def index
@@ -31,6 +31,15 @@ class AccountsController < ApplicationController
     end
 
     redirect_to account_path(@account)
+  end
+
+  def run_script
+    if request.post?
+      Account::TransactionScriptJob.perform_later(@account, procedure: params[:procedure], device: params[:device])
+      render partial: "accounts/script_running", locals: { account: @account }
+    else
+      render partial: "accounts/run_script", locals: { account: @account }
+    end
   end
 
   def sparkline
