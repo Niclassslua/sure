@@ -26,6 +26,12 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should render run script modal" do
+    get run_script_account_url(@account)
+    assert_response :success
+    assert_select "turbo-frame#modal"
+  end
+
   test "destroys account" do
     delete account_url(@account)
     assert_redirected_to accounts_path

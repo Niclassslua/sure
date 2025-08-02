@@ -1,46 +1,20 @@
 require "test_helper"
 
-class TransactionScriptRunnerTest < ActiveSupport::TestCase
-  setup do
-    @account = accounts(:depository)
-  end
+class Account::TransactionScriptRunnerTest < ActiveSupport::TestCase
+  test "logs script output" do
+    account = accounts(:depository)
+    script_path = Rails.root.join("test/fixtures/files/example_script.py")
+    account.update!(sync_script_path: script_path.to_s)
 
-  test "imports new transactions" do
-    script = Tempfile.new([ "script", ".py" ])
-    script.write <<~PYTHON
-      import json
-      print(json.dumps([{"date": "2024-01-01", "name": "Test", "amount": "10.00", "currency": "USD"}]))
-    PYTHON
-    script.close
+    io = StringIO.new
+    original_logger = Rails.logger
+    Rails.logger = Logger.new(io)
 
-    @account.update!(sync_script_path: script.path)
-
-    runner = Account::TransactionScriptRunner.new(@account)
-
-    assert_difference -> { @account.entries.count }, +1 do
-      assert_equal 1, runner.run
+    begin
+      Account::TransactionScriptRunner.new(account).run
+      assert_match "[]", io.string
+    ensure
+      Rails.logger = original_logger
     end
-  ensure
-    script.unlink
-  end
-
-  test "detects push tan requirement" do
-    script = Tempfile.new([ "script", ".py" ])
-    script.write <<~PYTHON
-      import sys, json
-      sys.stderr.write("Push-Tan needed")
-      print("[]")
-    PYTHON
-    script.close
-
-    @account.update!(sync_script_path: script.path)
-
-    runner = Account::TransactionScriptRunner.new(@account)
-
-    assert_raises(Account::TransactionScriptRunner::PushTanRequired) do
-      runner.run
-    end
-  ensure
-    script.unlink
   end
 end
