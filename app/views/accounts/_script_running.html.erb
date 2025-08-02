@@ -1,8 +1,8 @@
 <%= render DS::Dialog.new do |dialog| %>
   <% dialog.with_body do %>
-    <div class="text-center space-y-4 py-6">
+    <div class="py-6 text-center space-y-4">
       <div class="flex justify-center">
-        <%= icon 'loader-circle', class: 'animate-spin' %>
+        <%= icon "loader-circle", class: "animate-spin" %>
       </div>
       <p>Script wird ausgeführt...</p>
     </div>
