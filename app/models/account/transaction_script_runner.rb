@@ -10,6 +10,8 @@ class Account::TransactionScriptRunner
     @account = account
   end
 
+  # Führt das zugeordnete Python-Skript aus. Optional können TAN-Verfahren und Gerät übergeben werden.
+  # Gibt die Anzahl neu hinzugefügter Einträge zurück.
   def run(procedure: nil, device: nil)
     return 0 unless account.sync_script_path.present?
 
@@ -17,21 +19,31 @@ class Account::TransactionScriptRunner
     env["TAN_PROCEDURE"] = procedure if procedure.present?
     env["TAN_DEVICE"] = device if device.present?
 
-    stdout, stderr, _status = Open3.capture3(env, "python3", account.sync_script_path)
+    stdout, stderr, status = Open3.capture3(env, "python3", account.sync_script_path)
+    output = [stdout, stderr].join("\n")
 
-    output = [ stdout, stderr ].join("\n")
-    if output.match?(/push[- ]?tan/i)
-      raise PushTanRequired, "pushTAN authorization required"
+    # pushTAN / BestSign Hinweis erkennen
+    if output.match?(/push[- ]?tan/i) || output.match?(/bestsign/i)
+      # Optional: Details ins Log
+      Rails.logger.info("PushTAN/BestSign Hinweis im Script-Output entdeckt.") 
+      raise PushTanRequired, "pushTAN/BestSign authorization required"
     end
 
-    transactions = JSON.parse(stdout.presence || "[]")
+    transactions_json = stdout.presence || "[]"
+    transactions = JSON.parse(transactions_json)
     added = 0
 
     transactions.each do |tx|
-      date = Date.parse(tx["date"].to_s)
-      amount = BigDecimal(tx["amount"].to_s)
-      name = tx["name"].to_s
-      currency = tx["currency"].presence || account.currency
+      # Erwartete Struktur: z. B. { "date": "...", "amount": "...", "name": "...", "currency": "..." }
+      begin
+        date = Date.parse(tx["date"].to_s)
+        amount = BigDecimal(tx["amount"].to_s)
+        name = tx["name"].to_s
+        currency = tx["currency"].presence || account.currency
+      rescue => e
+        Rails.logger.warn("Ungültige Transaktion übersprungen (Parsing-Fehler): #{e.message} -- #{tx.inspect}")
+        next
+      end
 
       exists = account.entries.where(
         date: date,
@@ -54,7 +66,7 @@ class Account::TransactionScriptRunner
 
     added
   rescue JSON::ParserError => e
-    Rails.logger.error("Failed to parse transaction script output: #{e.message}")
+    Rails.logger.error("Failed to parse transaction script output: #{e.message}; raw stdout: #{stdout.inspect}")
     0
   end
 end
