@@ -65,6 +65,16 @@ tr:
     securities:
       show:
         page_title: Menkul Kıymet
+    scripts:
+      show:
+        page_title: Komut Dosyaları
+        section_title: Komut dosyalarını yönet
+        account_label: Hesap
+        select_account: Hesap seç
+        choose: Seç
+        script_label: Python komut dosyası
+        upload: Yükle
+        current_script: Mevcut komut dosyası
     settings_nav:
       accounts_label: Hesaplar
       api_key_label: API Anahtarı
@@ -73,6 +83,7 @@ tr:
       feedback_label: Geri Bildirim
       general_section_title: Genel
       imports_label: İçe Aktarımlar
+      scripts_label: Komut Dosyaları
       logout: Çıkış Yap
       merchants_label: Satıcılar
       other_section_title: Diğer

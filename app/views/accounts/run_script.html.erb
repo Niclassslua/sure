@@ -1,0 +1,19 @@
+<turbo-frame id="modal">
+  <div class="p-6">
+    <%= form_with url: run_script_account_path(@account), method: :post, data: { turbo_frame: :modal } do |f| %>
+      <div class="space-y-4">
+        <div>
+          <%= f.label :procedure, "Verfahren", class: "block text-sm" %>
+          <%= f.text_field :procedure, class: "w-full" %>
+        </div>
+        <div>
+          <%= f.label :device, "Gerät", class: "block text-sm" %>
+          <%= f.text_field :device, class: "w-full" %>
+        </div>
+        <div class="flex justify-end">
+          <%= f.submit "Run", class: "px-4 py-2 border rounded-lg" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</turbo-frame>
