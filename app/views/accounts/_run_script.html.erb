@@ -1,11 +1,17 @@
 <%= render DS::Dialog.new do |dialog| %>
-  <% dialog.with_header(title: "Python Script ausführen") %>
+  <% dialog.with_header(title: t('.title', default: 'Run Python script')) %>
   <% dialog.with_body do %>
-    <%= styled_form_with url: run_script_account_path(@account), method: :post, data: { turbo_frame: :modal }, class: "space-y-4" do |form| %>
-      <%= form.text_field :procedure, label: "Verfahren" %>
-      <%= form.text_field :device, label: "Gerät" %>
+    <%= form_with url: run_script_account_path(account), method: :post, class: 'space-y-4' do |f| %>
+      <div>
+        <%= f.label :procedure, 'Verfahren', class: 'block text-sm' %>
+        <%= f.text_field :procedure, class: 'w-full' %>
+      </div>
+      <div>
+        <%= f.label :device, 'Gerät', class: 'block text-sm' %>
+        <%= f.text_field :device, class: 'w-full' %>
+      </div>
       <div class="flex justify-end">
-        <%= form.submit "Run", class: "bg-inverse fg-inverse rounded-lg px-4 py-2" %>
+        <%= render DS::Button.new(text: 'Run', type: 'submit') %>
       </div>
     <% end %>
   <% end %>

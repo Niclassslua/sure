@@ -42,7 +42,5 @@ class TransactionScriptRunnerTest < ActiveSupport::TestCase
     assert_raises(Account::TransactionScriptRunner::PushTanRequired) do
       runner.run
     end
-  ensure
-    script.unlink
   end
 end
