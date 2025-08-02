@@ -18,7 +18,9 @@ class TransactionScriptRunnerTest < ActiveSupport::TestCase
     runner = Account::TransactionScriptRunner.new(@account)
 
     assert_difference -> { @account.entries.count }, +1 do
-      assert_equal 1, runner.run
+      result = runner.run
+      assert_equal 1, result.added
+      assert_match "Test", result.output
     end
   ensure
     script.unlink
