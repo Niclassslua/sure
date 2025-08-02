@@ -71,6 +71,16 @@ de:
     securities:
       show:
         page_title: Sicherheit
+    scripts:
+      show:
+        page_title: Skripte
+        section_title: Skripte verwalten
+        account_label: Konto
+        select_account: Konto auswählen
+        choose: Auswählen
+        script_label: Python-Skript
+        upload: Hochladen
+        current_script: Aktuelles Skript
     settings_nav:
       accounts_label: Konten
       api_key_label: API-Schlüssel
@@ -79,6 +89,7 @@ de:
       feedback_label: Feedback
       general_section_title: Allgemein
       imports_label: Importe
+      scripts_label: Skripte
       logout: Abmelden
       merchants_label: Händler
       other_section_title: Mehr

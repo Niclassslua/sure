@@ -101,6 +101,7 @@ tasks.json
 .taskmaster/state.json
 *.mcp.json
 scripts/
+!app/views/settings/scripts/
 .cursor/mcp.json
 .taskmasterconfig
 .windsurfrules
