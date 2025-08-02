@@ -3,7 +3,7 @@ class AccountsController < ApplicationController
   include Periodable
 
   def index
-    @manual_accounts = family.accounts.manual.alphabetically
+    @manual_accounts = family.accounts.manual.with_attached_logo.alphabetically
     @plaid_items = family.plaid_items.ordered
 
     render layout: "settings"

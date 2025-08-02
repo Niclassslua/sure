@@ -17,6 +17,7 @@ tr:
       balance: Güncel bakiye
       name_label: Hesap adı
       name_placeholder: Örnek hesap adı
+      logo: Logo
     index:
       accounts: Hesaplar
       manual_accounts:
