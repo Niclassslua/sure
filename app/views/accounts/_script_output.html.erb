@@ -1,0 +1,7 @@
+<%= render DS::Dialog.new(reload_on_close: true) do |dialog| %>
+  <% dialog.with_header(title: "Script Output") %>
+  <% dialog.with_body do %>
+    <pre class="whitespace-pre-wrap text-left text-sm"><%= output.presence || "" %></pre>
+  <% end %>
+<% end %>
+
