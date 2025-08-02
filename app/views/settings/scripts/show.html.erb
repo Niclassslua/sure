@@ -19,6 +19,14 @@
           <%= f.label :script, t(".script_label"), class: "block text-sm" %>
           <%= f.file_field :script, accept: ".py" %>
         </div>
+        <div class="space-y-2">
+          <%= f.label :requirements, t(".requirements_label"), class: "block text-sm" %>
+          <%= f.file_field :requirements, accept: ".txt" %>
+        </div>
+        <div class="space-y-2">
+          <%= f.label :env, t(".env_label"), class: "block text-sm" %>
+          <%= f.file_field :env, accept: ".env,.txt" %>
+        </div>
         <div class="mt-4">
           <%= f.submit t(".upload"), class: "px-4 py-2 border rounded-lg" %>
         </div>

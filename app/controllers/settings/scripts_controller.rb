@@ -13,19 +13,34 @@ class Settings::ScriptsController < ApplicationController
 
   def update
     account = Current.family.accounts.find(update_params[:account_id])
+    dir = Rails.root.join("storage", "scripts", "account_#{account.id}")
+    FileUtils.mkdir_p(dir)
+
     if update_params[:script].present?
-      dir = Rails.root.join("storage", "scripts")
-      FileUtils.mkdir_p(dir)
-      path = dir.join("account_#{account.id}.py")
+      path = dir.join("script.py")
       File.open(path, "wb") { |f| f.write(update_params[:script].read) }
+      File.chmod(0o600, path)
       account.update!(sync_script_path: path.to_s)
     end
+
+    if update_params[:requirements].present?
+      req_path = dir.join("requirements.txt")
+      File.open(req_path, "wb") { |f| f.write(update_params[:requirements].read) }
+      File.chmod(0o600, req_path)
+    end
+
+    if update_params[:env].present?
+      env_path = dir.join(".env")
+      File.open(env_path, "wb") { |f| f.write(update_params[:env].read) }
+      File.chmod(0o600, env_path)
+    end
+
     redirect_to settings_script_path(account_id: account.id), notice: "Script updated"
   end
 
   private
 
     def update_params
-      params.permit(:account_id, :script)
+      params.permit(:account_id, :script, :requirements, :env)
     end
 end
