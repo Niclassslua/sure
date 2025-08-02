@@ -1,0 +1,9 @@
+<turbo-frame id="modal">
+  <div class="p-6 text-center">
+    <div class="mb-4 flex justify-center">
+      <%= icon "smartphone", size: "2xl", color: "current" %>
+    </div>
+    <p class="mb-4">Bitte die pushTAN in deiner Banking-App bestätigen.</p>
+    <%= link_to "OK", "#", class: "flex justify-center px-4 py-2 border rounded-lg", data: { action: "click->modal#close" } %>
+  </div>
+</turbo-frame>
