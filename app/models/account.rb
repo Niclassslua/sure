@@ -96,6 +96,11 @@ class Account < ApplicationRecord
     Account::PushTanRequiredEvent.new(self).broadcast
   end
 
+  # Broadcast transaction script output to the UI
+  def broadcast_script_output(output)
+    Account::ScriptOutputEvent.new(self, output).broadcast
+  end
+
   def destroy_later
     mark_for_deletion!
     DestroyJob.perform_later(self)

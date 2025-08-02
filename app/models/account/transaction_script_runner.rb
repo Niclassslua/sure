@@ -4,6 +4,8 @@ require "json"
 class Account::TransactionScriptRunner
   class PushTanRequired < StandardError; end
 
+  Result = Struct.new(:added, :output)
+
   attr_reader :account
 
   def initialize(account)
@@ -13,7 +15,7 @@ class Account::TransactionScriptRunner
   # Führt das zugeordnete Python-Skript aus. Optional können TAN-Verfahren und Gerät übergeben werden.
   # Gibt die Anzahl neu hinzugefügter Einträge zurück.
   def run(procedure: nil, device: nil)
-    return 0 unless account.sync_script_path.present?
+    return Result.new(0, "") unless account.sync_script_path.present?
 
     env = {}
     env["TAN_PROCEDURE"] = procedure if procedure.present?
@@ -67,9 +69,9 @@ class Account::TransactionScriptRunner
       added += 1
     end
 
-    added
+    Result.new(added, output)
   rescue JSON::ParserError => e
     Rails.logger.error("Failed to parse transaction script output: #{e.message}; raw stdout: #{stdout.inspect}")
-    0
+    Result.new(0, output)
   end
 end
