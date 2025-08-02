@@ -20,12 +20,15 @@ class Account::TransactionScriptRunner
     env["TAN_DEVICE"] = device if device.present?
 
     stdout, stderr, status = Open3.capture3(env, "python3", account.sync_script_path)
-    output = [stdout, stderr].join("\n")
+    Rails.logger.info("Transaction script stdout:\n#{stdout}") if stdout.present?
+    Rails.logger.info("Transaction script stderr:\n#{stderr}") if stderr.present?
+    Rails.logger.info("Transaction script exited with status #{status.exitstatus}") unless status.success?
+    output = [ stdout, stderr ].join("\n")
 
     # pushTAN / BestSign Hinweis erkennen
     if output.match?(/push[- ]?tan/i) || output.match?(/bestsign/i)
       # Optional: Details ins Log
-      Rails.logger.info("PushTAN/BestSign Hinweis im Script-Output entdeckt.") 
+      Rails.logger.info("PushTAN/BestSign Hinweis im Script-Output entdeckt.")
       raise PushTanRequired, "pushTAN/BestSign authorization required"
     end
 

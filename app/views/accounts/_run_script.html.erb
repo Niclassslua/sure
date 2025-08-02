@@ -1,19 +1,18 @@
-<turbo-frame id="modal">
-  <div class="p-6">
-    <%= form_with url: run_script_account_path(@account), method: :post, data: { turbo_frame: :modal } do |f| %>
-      <div class="space-y-4">
-        <div>
-          <%= f.label :procedure, "Verfahren", class: "block text-sm" %>
-          <%= f.text_field :procedure, class: "w-full" %>
-        </div>
-        <div>
-          <%= f.label :device, "Gerät", class: "block text-sm" %>
-          <%= f.text_field :device, class: "w-full" %>
-        </div>
-        <div class="flex justify-end">
-          <%= f.submit "Run", class: "px-4 py-2 border rounded-lg" %>
-        </div>
+<%= render DS::Dialog.new do |dialog| %>
+  <% dialog.with_header(title: t('.title', default: 'Run Python script')) %>
+  <% dialog.with_body do %>
+    <%= form_with url: run_script_account_path(account), method: :post, class: 'space-y-4' do |f| %>
+      <div>
+        <%= f.label :procedure, 'Verfahren', class: 'block text-sm' %>
+        <%= f.text_field :procedure, class: 'w-full' %>
+      </div>
+      <div>
+        <%= f.label :device, 'Gerät', class: 'block text-sm' %>
+        <%= f.text_field :device, class: 'w-full' %>
+      </div>
+      <div class="flex justify-end">
+        <%= render DS::Button.new(text: 'Run', type: 'submit') %>
       </div>
     <% end %>
-  </div>
-</turbo-frame>
+  <% end %>
+<% end %>
