@@ -8,6 +8,7 @@ module SettingsHelper
     { name: "Billing", path: :settings_billing_path, condition: :not_self_hosted? },
     { name: "Accounts", path: :accounts_path },
     { name: "Imports", path: :imports_path },
+    { name: "Account APIs", path: :settings_account_api_path },
     { name: "Tags", path: :tags_path },
     { name: "Categories", path: :categories_path },
     { name: "Rules", path: :rules_path },
