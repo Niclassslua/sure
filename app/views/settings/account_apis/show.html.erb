@@ -1,0 +1,16 @@
+<%= content_for :page_title, t('.page_title') %>
+
+<%= settings_section title: t('.section_title') do %>
+  <div class="space-y-6">
+    <% @accounts.each do |account| %>
+      <%= form_with url: settings_account_apis_path, method: :put, local: true, class: 'space-y-2' do %>
+        <%= hidden_field_tag :account_id, account.id %>
+        <div class="space-y-1">
+          <%= label_tag "account_api_#{account.id}", account.name, class: 'block text-sm font-medium text-secondary' %>
+          <%= text_field_tag 'account[fints_api_base_url]', account.fints_api_base_url, id: "account_api_#{account.id}", class: 'w-full bg-container-inset border border-secondary rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-secondary text-primary' %>
+        </div>
+        <%= render DS::Button.new(text: t('.save'), type: 'submit') %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

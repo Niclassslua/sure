@@ -18,6 +18,8 @@ tr:
       name_label: Hesap adı
       name_placeholder: Örnek hesap adı
       logo: Logo
+      fints_api_base_url_label: Hesap API URL'si
+      fints_api_base_url_placeholder: örn. http://localhost:8100
     index:
       accounts: Hesaplar
       manual_accounts:
@@ -53,7 +55,13 @@ tr:
         confirm_title: Hesap silinsin mi?
         edit: Düzenle
         import: İşlemleri içe aktar
-        manage: Hesapları yönet
+      manage: Hesapları yönet
+    fetch_fints:
+      title: İşlemleri getir
+      days_label: Günler
+      pin_label: PIN (isteğe bağlı)
+      start: Başlat
+      confirm: Onayla
     update:
       success: "%{type} hesabı güncellendi"
   email_confirmations:

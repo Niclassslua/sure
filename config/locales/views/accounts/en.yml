@@ -18,6 +18,8 @@ en:
       name_label: Account name
       name_placeholder: Example account name
       logo: Logo
+      fints_api_base_url_label: Account API URL
+      fints_api_base_url_placeholder: e.g. http://localhost:8100
     index:
       accounts: Accounts
       manual_accounts:
@@ -57,7 +59,13 @@ en:
         confirm_title: Delete account?
         edit: Edit
         import: Import transactions
-        manage: Manage accounts
+      manage: Manage accounts
+    fetch_fints:
+      title: Fetch Transactions
+      days_label: Days
+      pin_label: PIN (optional)
+      start: Start
+      confirm: Confirm
     update:
       success: "%{type} account updated"
   email_confirmations:

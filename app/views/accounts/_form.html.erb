@@ -18,6 +18,8 @@
       </div>
     </div>
 
+    <%= form.text_field :fints_api_base_url, label: t(".fints_api_base_url_label"), placeholder: t(".fints_api_base_url_placeholder") %>
+
     <% unless account.linked? %>
       <%= form.money_field :balance, label: t(".balance"), required: true, default_currency: Current.family.currency %>
     <% end %>
