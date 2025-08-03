@@ -1,21 +1,26 @@
 <%= render DS::Dialog.new do |dialog| %>
-  <% dialog.with_header(title: t('.title')) %>
+  <% dialog.with_header(title: 'Fetch Transactions') %>
   <% dialog.with_body do %>
     <div data-controller="fints" data-fints-base-url-value="<%= account.fints_api_base_url %>" data-fints-account-id-value="<%= account.id %>" class="space-y-4">
       <div>
-        <label class="block text-sm font-medium text-secondary mb-1"><%= t('.days_label') %></label>
+        <label class="block text-sm font-medium text-secondary mb-1">Days</label>
         <input type="number" value="30" data-fints-target="days" class="w-full bg-container-inset border border-secondary rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-secondary text-primary" />
       </div>
       <div>
-        <label class="block text-sm font-medium text-secondary mb-1"><%= t('.pin_label') %></label>
+        <label class="block text-sm font-medium text-secondary mb-1">PIN (optional)</label>
         <input type="password" data-fints-target="pin" class="w-full bg-container-inset border border-secondary rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-secondary text-primary" />
       </div>
       <div data-fints-target="status" class="text-center text-sm text-secondary"></div>
       <div class="flex justify-center">
-        <%= render DS::Button.new(text: t('.confirm'), type: 'button', class: 'hidden', data: { action: 'fints#confirm', fints_target: 'confirmButton' }) %>
+        <button type="button" data-action="fints#confirm" data-fints-target="confirmButton" class="hidden px-4 py-2 border rounded-lg">Confirm</button>
       </div>
       <div class="flex justify-end">
-        <%= render DS::Button.new(text: t('.start'), type: 'button', data: { action: 'fints#start' }) %>
+        <%= render DS::Button.new(
+              text: 'Start',
+              type: 'button',
+              class: 'font-medium whitespace-nowrap inline-flex items-center gap-1 rounded-md px-4 py-2 text-sm bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-100',
+              data: { action: 'fints#start' }
+            ) %>
       </div>
     </div>
   <% end %>
