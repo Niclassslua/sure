@@ -20,7 +20,7 @@ module Accounts
     end
 
     def confirm
-      response = client.post("/sessions/#{params[:id]}")
+      response = client.post("/sessions/#{params[:id]}/confirm")
       render json: JSON.parse(response.body), status: response.status
     rescue Faraday::Error => e
       render json: { error: e.message }, status: :bad_gateway
