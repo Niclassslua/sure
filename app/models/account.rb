@@ -88,18 +88,7 @@ class Account < ApplicationRecord
     end
   end
 
-  # Path to custom Python script used for transaction syncing
-  validates :sync_script_path, length: { maximum: 255 }, allow_nil: true
-
-  # Broadcast a pushTAN requirement to the UI
-  def broadcast_push_tan_required
-    Account::PushTanRequiredEvent.new(self).broadcast
-  end
-
-  # Broadcast transaction script output to the UI
-  def broadcast_script_output(output)
-    Account::ScriptOutputEvent.new(self, output).broadcast
-  end
+  validates :fints_api_base_url, length: { maximum: 255 }, allow_nil: true
 
   def destroy_later
     mark_for_deletion!

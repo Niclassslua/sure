@@ -36,15 +36,14 @@
             disabled: account.syncing?,
             frame: :_top
           ) %>
-        <% if account.sync_script_path.present? %>
-          <%= icon(
-              "play",
-              as_button: true,
-              size: "sm",
-              href: run_script_account_path(account),
-              disabled: account.syncing?,
-              frame: :modal
-            ) %>
+        <% if account.fints_api_base_url.present? %>
+          <%= render DS::Link.new(
+                variant: :icon,
+                icon: "play",
+                href: fetch_fints_account_path(account),
+                frame: :modal,
+                class: ("pointer-events-none opacity-50" if account.syncing?)
+              ) %>
         <% end %>
       <% end %>
 
