@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  before_action :set_account, only: %i[sync run_script sparkline toggle_active show destroy]
+  before_action :set_account, only: %i[sync fetch_fints import_fints sparkline toggle_active show destroy]
   include Periodable
 
   def index
@@ -33,13 +33,13 @@ class AccountsController < ApplicationController
     redirect_to account_path(@account)
   end
 
-  def run_script
-    if request.post?
-      Account::TransactionScriptJob.perform_later(@account, procedure: params[:procedure], device: params[:device])
-      render partial: "accounts/script_running", locals: { account: @account }
-    else
-      render partial: "accounts/run_script", locals: { account: @account }
-    end
+  def fetch_fints
+    render partial: "accounts/fetch_fints", locals: { account: @account }
+  end
+
+  def import_fints
+    added = Account::FintsCsvImporter.new(@account, params.require(:csv)).import!
+    render json: { added: added }
   end
 
   def sparkline

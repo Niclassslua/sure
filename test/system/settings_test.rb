@@ -12,6 +12,7 @@ class SettingsTest < ApplicationSystemTestCase
       [ "Categories", categories_path ],
       [ "Merchants", family_merchants_path ],
       [ "Imports", imports_path ],
+      [ "Account APIs", settings_account_api_path ],
       [ "What's new", changelog_path ],
       [ "Feedback", feedback_path ]
     ]

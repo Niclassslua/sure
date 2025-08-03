@@ -1,0 +1,28 @@
+<%= content_for :page_title, t(".page_title") %>
+
+<%= settings_section title: t(".section_title") do %>
+  <div class="space-y-6">
+    <%= form_with url: settings_account_api_path, method: :get, local: true do |f| %>
+      <div class="space-y-2">
+        <%= f.label :account_id, t(".account_label"), class: "block text-sm" %>
+        <%= f.collection_select :account_id, @accounts, :id, :name, { prompt: t(".select_account") }, { class: "w-full" } %>
+      </div>
+      <div class="mt-4">
+        <%= f.submit t(".choose"), class: "px-4 py-2 border rounded-lg" %>
+      </div>
+    <% end %>
+
+    <% if @account %>
+      <%= form_with url: settings_account_api_path, method: :put, local: true do |f| %>
+        <%= hidden_field_tag :account_id, @account.id %>
+        <div class="space-y-2">
+          <%= f.label :fints_api_base_url, t(".fints_api_base_url_label"), class: "block text-sm" %>
+          <%= f.text_field :fints_api_base_url, value: @account.fints_api_base_url, class: "w-full" %>
+        </div>
+        <div class="mt-4">
+          <%= f.submit t(".save"), class: "px-4 py-2 border rounded-lg" %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

@@ -63,7 +63,7 @@ Rails.application.routes.draw do
     resource :billing, only: :show
     resource :security, only: :show
     resource :api_key, only: [ :show, :new, :create, :destroy ]
-    resource :script, only: %i[show update]
+    resource :account_api, only: %i[show update]
   end
 
   resource :subscription, only: %i[new show create] do
@@ -160,8 +160,8 @@ Rails.application.routes.draw do
   resources :accounts, only: %i[index new show destroy], shallow: true do
     member do
       post :sync
-      get :run_script
-      post :run_script
+      get :fetch_fints
+      post :import_fints
       get :sparkline
       patch :toggle_active
     end
