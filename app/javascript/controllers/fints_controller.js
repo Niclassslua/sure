@@ -3,7 +3,6 @@ import { Controller } from "@hotwired/stimulus";
 // Connects to data-controller="fints"
 export default class extends Controller {
   static values = {
-    baseUrl: String,
     accountId: String,
   };
 
@@ -11,15 +10,14 @@ export default class extends Controller {
 
   start() {
     const days = parseInt(this.daysTarget.value || "30", 10);
-    const headers = { "Content-Type": "application/json" };
-    if (this.pinTarget.value) {
-      headers["x-pin"] = this.pinTarget.value;
-    }
     this.updateStatus("Starting session...");
-    fetch(`${this.baseUrlValue}/sessions`, {
+    fetch(`/accounts/${this.accountIdValue}/fints_sessions`, {
       method: "POST",
-      headers: headers,
-      body: JSON.stringify({ days: days }),
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-Token": document.querySelector('[name="csrf-token"]').content,
+      },
+      body: JSON.stringify({ days: days, pin: this.pinTarget.value }),
     })
       .then((r) => r.json())
       .then((data) => {
@@ -30,7 +28,8 @@ export default class extends Controller {
   }
 
   poll() {
-    fetch(`${this.baseUrlValue}/sessions/${this.sessionId}`)
+    fetch(`/accounts/${this.accountIdValue}/fints_sessions/${this.sessionId}`)
+
       .then((r) => r.json())
       .then((data) => {
         switch (data.status) {
@@ -57,7 +56,12 @@ export default class extends Controller {
 
   confirm() {
     this.confirmButtonTarget.classList.add("hidden");
-    fetch(`${this.baseUrlValue}/sessions/${this.sessionId}`, { method: "POST" })
+    fetch(`/accounts/${this.accountIdValue}/fints_sessions/${this.sessionId}/confirm`, {
+      method: "POST",
+      headers: {
+        "X-CSRF-Token": document.querySelector('[name="csrf-token"]').content,
+      },
+    })
       .then(() => {
         this.updateStatus("Processing...");
         setTimeout(() => this.poll(), 2000);
@@ -66,7 +70,8 @@ export default class extends Controller {
   }
 
   downloadResult() {
-    fetch(`${this.baseUrlValue}/sessions/${this.sessionId}/result`)
+    fetch(`/accounts/${this.accountIdValue}/fints_sessions/${this.sessionId}/result`)
+
       .then((r) => r.text())
       .then((csv) => {
         this.updateStatus("Importing...");

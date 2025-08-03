@@ -1,7 +1,7 @@
 <%= render DS::Dialog.new do |dialog| %>
   <% dialog.with_header(title: 'Fetch Transactions') %>
   <% dialog.with_body do %>
-    <div data-controller="fints" data-fints-base-url-value="<%= account.fints_api_base_url %>" data-fints-account-id-value="<%= account.id %>" class="space-y-4">
+    <div data-controller="fints" data-fints-account-id-value="<%= account.id %>" class="space-y-4">
       <div>
         <label class="block text-sm font-medium text-secondary mb-1">Days</label>
         <input type="number" value="30" data-fints-target="days" class="w-full bg-container-inset border border-secondary rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-secondary text-primary" />

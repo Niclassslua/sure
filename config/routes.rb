@@ -171,6 +171,11 @@ Rails.application.routes.draw do
     end
   end
 
+  post "/accounts/:account_id/fints_sessions", to: "accounts/fints_sessions#create", as: :account_fints_sessions
+  get "/accounts/:account_id/fints_sessions/:id", to: "accounts/fints_sessions#show", as: :account_fints_session
+  post "/accounts/:account_id/fints_sessions/:id/confirm", to: "accounts/fints_sessions#confirm", as: :confirm_account_fints_session
+  get "/accounts/:account_id/fints_sessions/:id/result", to: "accounts/fints_sessions#result", as: :result_account_fints_session
+
   # Convenience routes for polymorphic paths
   # Example: account_path(Account.new(accountable: Depository.new)) => /depositories/123
   direct :edit_account do |model, options|
