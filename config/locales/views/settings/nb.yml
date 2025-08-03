@@ -70,7 +70,11 @@ nb:
     account_apis:
       show:
         page_title: Konto-APIer
-        section_title: Konto-APIer
+        section_title: Administrer konto-APIer
+        account_label: Konto
+        select_account: Velg konto
+        choose: Velg
+        fints_api_base_url_label: API-base-URL
         save: Lagre
     settings_nav:
       accounts_label: Kontoer

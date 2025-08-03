@@ -68,7 +68,11 @@ tr:
     account_apis:
       show:
         page_title: Hesap API'leri
-        section_title: Hesap API'leri
+        section_title: Hesap API'lerini yönet
+        account_label: Hesap
+        select_account: Hesap seç
+        choose: Seç
+        fints_api_base_url_label: API taban URL'si
         save: Kaydet
     settings_nav:
       accounts_label: Hesaplar

@@ -71,7 +71,11 @@ en:
     account_apis:
       show:
         page_title: Account APIs
-        section_title: Account APIs
+        section_title: Manage account APIs
+        account_label: Account
+        select_account: Select account
+        choose: Choose
+        fints_api_base_url_label: API base URL
         save: Save
     settings_nav:
       accounts_label: Accounts

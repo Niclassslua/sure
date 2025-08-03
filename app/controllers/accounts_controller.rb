@@ -42,15 +42,6 @@ class AccountsController < ApplicationController
     render json: { added: added }
   end
 
-  def fetch_fints
-    render partial: "accounts/fetch_fints", locals: { account: @account }
-  end
-
-  def import_fints
-    added = Account::FintsCsvImporter.new(@account, params.require(:csv)).import!
-    render json: { added: added }
-  end
-
   def sparkline
     etag_key = @account.family.build_cache_key("#{@account.id}_sparkline", invalidate_on_data_updates: true)
 

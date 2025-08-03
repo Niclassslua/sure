@@ -1,15 +1,27 @@
-<%= content_for :page_title, t('.page_title') %>
+<%= content_for :page_title, t(".page_title") %>
 
-<%= settings_section title: t('.section_title') do %>
+<%= settings_section title: t(".section_title") do %>
   <div class="space-y-6">
-    <% @accounts.each do |account| %>
-      <%= form_with url: settings_account_apis_path, method: :put, local: true, class: 'space-y-2' do %>
-        <%= hidden_field_tag :account_id, account.id %>
-        <div class="space-y-1">
-          <%= label_tag "account_api_#{account.id}", account.name, class: 'block text-sm font-medium text-secondary' %>
-          <%= text_field_tag 'account[fints_api_base_url]', account.fints_api_base_url, id: "account_api_#{account.id}", class: 'w-full bg-container-inset border border-secondary rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-secondary text-primary' %>
+    <%= form_with url: settings_account_api_path, method: :get, local: true do |f| %>
+      <div class="space-y-2">
+        <%= f.label :account_id, t(".account_label"), class: "block text-sm" %>
+        <%= f.collection_select :account_id, @accounts, :id, :name, { prompt: t(".select_account") }, { class: "w-full" } %>
+      </div>
+      <div class="mt-4">
+        <%= f.submit t(".choose"), class: "px-4 py-2 border rounded-lg" %>
+      </div>
+    <% end %>
+
+    <% if @account %>
+      <%= form_with url: settings_account_api_path, method: :put, local: true do |f| %>
+        <%= hidden_field_tag :account_id, @account.id %>
+        <div class="space-y-2">
+          <%= f.label :fints_api_base_url, t(".fints_api_base_url_label"), class: "block text-sm" %>
+          <%= f.text_field :fints_api_base_url, value: @account.fints_api_base_url, class: "w-full" %>
         </div>
-        <%= render DS::Button.new(text: t('.save'), type: 'submit') %>
+        <div class="mt-4">
+          <%= f.submit t(".save"), class: "px-4 py-2 border rounded-lg" %>
+        </div>
       <% end %>
     <% end %>
   </div>

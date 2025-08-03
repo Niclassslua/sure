@@ -37,20 +37,15 @@
             frame: :_top,
             aria: { label: "Synchronisieren" }
           ) %>
-
         <% if account.fints_api_base_url.present? %>
-          <%= link_to fetch_fints_account_path(account), 
-              class: "inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-100 shadow-sm",
-              "aria-label": "Fints-Konto abrufen",
-              "data-frame": "modal",
-              "aria-disabled": account.syncing? do %>
-            <!-- Download / Daten holen Icon -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M12 3v12m0 0l-4-4m4 4l4-4" />
-              <path d="M5 18h14" />
-            </svg>
-            <span>Daten holen</span>
-          <% end %>
+          <%= render DS::Link.new(
+                variant: :icon,
+                icon: "play",
+                href: fetch_fints_account_path(account),
+                frame: :modal,
+                class: ("pointer-events-none opacity-50" if account.syncing?)
+                aria: { label: "Daten holen" }
+              ) %>
         <% end %>
       <% end %>
 

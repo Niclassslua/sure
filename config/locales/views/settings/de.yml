@@ -74,7 +74,11 @@ de:
     account_apis:
       show:
         page_title: Konto-APIs
-        section_title: Konto-APIs
+        section_title: Konto-APIs verwalten
+        account_label: Konto
+        select_account: Konto auswählen
+        choose: Auswählen
+        fints_api_base_url_label: API-Basis-URL
         save: Speichern
     settings_nav:
       accounts_label: Konten

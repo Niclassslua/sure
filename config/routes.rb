@@ -63,7 +63,7 @@ Rails.application.routes.draw do
     resource :billing, only: :show
     resource :security, only: :show
     resource :api_key, only: [ :show, :new, :create, :destroy ]
-    resource :account_apis, only: %i[show update]
+    resource :account_api, only: %i[show update]
   end
 
   resource :subscription, only: %i[new show create] do
