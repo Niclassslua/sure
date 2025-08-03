@@ -29,6 +29,7 @@ export default class extends Controller {
 
   poll() {
     fetch(`/accounts/${this.accountIdValue}/fints_sessions/${this.sessionId}`)
+
       .then((r) => r.json())
       .then((data) => {
         switch (data.status) {
@@ -70,6 +71,7 @@ export default class extends Controller {
 
   downloadResult() {
     fetch(`/accounts/${this.accountIdValue}/fints_sessions/${this.sessionId}/result`)
+
       .then((r) => r.text())
       .then((csv) => {
         this.updateStatus("Importing...");
