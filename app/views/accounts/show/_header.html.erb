@@ -34,7 +34,8 @@
             size: "sm",
             href: account.linked? ? sync_plaid_item_path(account.plaid_account.plaid_item) : sync_account_path(account),
             disabled: account.syncing?,
-            frame: :_top
+            frame: :_top,
+            aria: { label: "Synchronisieren" }
           ) %>
         <% if account.fints_api_base_url.present? %>
           <%= render DS::Link.new(
@@ -43,6 +44,7 @@
                 href: fetch_fints_account_path(account),
                 frame: :modal,
                 class: ("pointer-events-none opacity-50" if account.syncing?)
+                aria: { label: "Daten holen" }
               ) %>
         <% end %>
       <% end %>
