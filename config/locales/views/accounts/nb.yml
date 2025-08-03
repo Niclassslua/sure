@@ -18,6 +18,8 @@ nb:
       name_label: Kontonavn
       name_placeholder: Eksempel på kontonavn
       logo: Logo
+      fints_api_base_url_label: Konto-API URL
+      fints_api_base_url_placeholder: f.eks. http://localhost:8100
     index:
       accounts: Kontoer
       manual_accounts:
@@ -53,7 +55,13 @@ nb:
         confirm_title: Slette konto?
         edit: Rediger
         import: Importer transaksjoner
-        manage: Administrer kontoer
+      manage: Administrer kontoer
+    fetch_fints:
+      title: Hent transaksjoner
+      days_label: Dager
+      pin_label: PIN (valgfritt)
+      start: Start
+      confirm: Bekreft
     update:
       success: "%{type} konto oppdatert"
   email_confirmations:

@@ -65,18 +65,11 @@ tr:
     securities:
       show:
         page_title: Menkul Kıymet
-    scripts:
+    account_apis:
       show:
-        page_title: Komut Dosyaları
-        section_title: Komut dosyalarını yönet
-        account_label: Hesap
-        select_account: Hesap seç
-        choose: Seç
-        script_label: Python komut dosyası
-        requirements_label: requirements.txt
-        env_label: .env dosyası
-        upload: Yükle
-        current_script: Mevcut komut dosyası
+        page_title: Hesap API'leri
+        section_title: Hesap API'leri
+        save: Kaydet
     settings_nav:
       accounts_label: Hesaplar
       api_key_label: API Anahtarı
@@ -85,7 +78,7 @@ tr:
       feedback_label: Geri Bildirim
       general_section_title: Genel
       imports_label: İçe Aktarımlar
-      scripts_label: Komut Dosyaları
+      account_apis_label: Hesap API'leri
       logout: Çıkış Yap
       merchants_label: Satıcılar
       other_section_title: Diğer
