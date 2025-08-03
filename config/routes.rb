@@ -162,6 +162,8 @@ Rails.application.routes.draw do
       post :sync
       get :run_script
       post :run_script
+      get :fetch_fints
+      post :import_fints
       get :sparkline
       patch :toggle_active
     end
