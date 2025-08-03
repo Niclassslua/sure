@@ -68,18 +68,11 @@ en:
     securities:
       show:
         page_title: Security
-    scripts:
+    account_apis:
       show:
-        page_title: Scripts
-        section_title: Manage Scripts
-        account_label: Account
-        select_account: Select account
-        choose: Choose
-        script_label: Python script
-        requirements_label: requirements.txt
-        env_label: .env file
-        upload: Upload
-        current_script: Current script
+        page_title: Account APIs
+        section_title: Account APIs
+        save: Save
     settings_nav:
       accounts_label: Accounts
       api_key_label: API Key
@@ -88,7 +81,7 @@ en:
       feedback_label: Feedback
       general_section_title: General
       imports_label: Imports
-      scripts_label: Scripts
+      account_apis_label: Account APIs
       logout: Logout
       merchants_label: Merchants
       other_section_title: More

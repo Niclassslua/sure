@@ -15,7 +15,12 @@
         <button type="button" data-action="fints#confirm" data-fints-target="confirmButton" class="hidden px-4 py-2 border rounded-lg">Confirm</button>
       </div>
       <div class="flex justify-end">
-        <%= render DS::Button.new(text: 'Start', type: 'button', class: 'font-medium whitespace-nowrap inline-flex items-center gap-1 rounded-md px-4 py-2 text-sm bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-100', data: { action: 'fints#start' }) %>
+        <%= render DS::Button.new(
+              text: 'Start',
+              type: 'button',
+              class: 'font-medium whitespace-nowrap inline-flex items-center gap-1 rounded-md px-4 py-2 text-sm bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-100',
+              data: { action: 'fints#start' }
+            ) %>
       </div>
     </div>
   <% end %>

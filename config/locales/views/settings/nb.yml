@@ -67,18 +67,11 @@ nb:
     securities:
       show:
         page_title: Sikkerhet
-    scripts:
+    account_apis:
       show:
-        page_title: Skript
-        section_title: Administrer skript
-        account_label: Konto
-        select_account: Velg konto
-        choose: Velg
-        script_label: Python-skript
-        requirements_label: requirements.txt
-        env_label: .env-fil
-        upload: Last opp
-        current_script: Gjeldende skript
+        page_title: Konto-APIer
+        section_title: Konto-APIer
+        save: Lagre
     settings_nav:
       accounts_label: Kontoer
       api_key_label: API-nøkkel
@@ -87,7 +80,7 @@ nb:
       feedback_label: Tilbakemelding
       general_section_title: Generelt
       imports_label: Importer
-      scripts_label: Skript
+      account_apis_label: Konto-APIer
       logout: Logg ut
       merchants_label: Forhandlere
       other_section_title: Mer
